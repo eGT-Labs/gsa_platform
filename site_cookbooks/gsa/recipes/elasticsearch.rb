@@ -30,6 +30,13 @@ source "etc/yum.repos.d/elasticsearch.repo.erb"
 end
 
 
+execute "yum -y install elasticsearch" do
+action :run
+end
+
+
+
+
 
 
 
