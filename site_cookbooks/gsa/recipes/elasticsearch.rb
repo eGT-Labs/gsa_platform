@@ -22,6 +22,13 @@ EOH
 end
 
 
+template '/etc/yum.repos.d/elasticsearch.repo' do
+owner 'root'
+group 'root'
+mode '0644'
+source "apache/conf/httpd.conf.erb"
+end
+
 
 
 
