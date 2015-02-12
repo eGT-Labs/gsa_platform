@@ -26,7 +26,7 @@ template '/etc/yum.repos.d/elasticsearch.repo' do
 owner 'root'
 group 'root'
 mode '0644'
-source "etc/elasticsearch/elasticsearch.repo.erb"
+source "etc/yum.repos.d/elasticsearch.repo.erb"
 end
 
 
