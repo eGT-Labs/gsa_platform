@@ -10,5 +10,5 @@
 
 include_recipe "utility::wget"
 include_recipe "utility::git"
-include_recipe "utility::java"
+include_recipe "gsa::java"
 
