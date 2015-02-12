@@ -31,7 +31,7 @@ end
 
 
 execute "yum -y install elasticsearch" do
-action :run
+ action :run
 end
 
 
