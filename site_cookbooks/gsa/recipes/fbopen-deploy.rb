@@ -70,7 +70,7 @@ user "root"
 code <<-EOH
 	
 	cd /root/.devops
-	cd #{$git_repo_name}
+	cd #{$git_repo_name}/api
 	cp config-sample_dev.js config.js
    
 EOH
