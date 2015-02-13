@@ -82,7 +82,7 @@ bash "Start python HTTPServer" do
 user "root"
 code <<-EOH
     set -ex
-	python -m SimpleHTTPServer 80 &
+	nohup python -m SimpleHTTPServer 80 &
 EOH
 end
 
