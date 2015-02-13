@@ -65,17 +65,13 @@ service "elasticsearch" do
 end
 
 
-execute "curl -XPUT localhost:9200/fbopen0 --data-binary @elasticsearch/init.json" do
- action :run
-end
-
 bash "For devlopment usage" do
 user "root"
 code <<-EOH
 	
 	cd /root/.devops
 	cd #{$git_repo_name}
-	sudo \cp config-sample_dev.js config.js
+	cp config-sample_dev.js config.js
    
 EOH
 end
