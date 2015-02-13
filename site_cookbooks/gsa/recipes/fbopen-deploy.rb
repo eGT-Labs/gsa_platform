@@ -18,7 +18,7 @@ $git_repo_name=node.gsa.global.git_repo_name
 bash "Clone FBOpenrepo" do
 user "root"
 code <<-EOH
-	 set -ex
+	 
      mkdir -p /root/.devops
      cd /root/.devops
      git clone https://#{$git_repo}
@@ -81,6 +81,7 @@ end
 bash "Start python HTTPServer" do
 user "root"
 code <<-EOH
+    set -ex
 	nohup python -m SimpleHTTPServer 80 &
 EOH
 end
