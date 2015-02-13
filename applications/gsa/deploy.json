@@ -1,0 +1,39 @@
+{
+"appname": "fbopen",
+"servers": [
+{
+"name": "portal",
+"ami-id": "ami-bc8131d4",
+"ssh_user":"root",
+"storage": [
+{
+"size": 15
+}
+],
+"run_list": [
+"role[gsa-fbopen-deploy]"
+],
+"size": "m1.small",
+"ingress_rules": [
+{
+"port": 80,
+"hosts": [
+"0.0.0.0/0"
+]
+},
+{
+"port": 443,
+"hosts": [
+"0.0.0.0/0"
+]
+}
+]
+}
+],
+"admins": [
+{
+"name": "jai",
+"email": "jaipbapna@gmail.com"
+}
+]
+}

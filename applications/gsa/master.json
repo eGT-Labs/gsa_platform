@@ -1,0 +1,33 @@
+<%
+	if $vpc_id
+		if !$nat_host_id or !$subnet_public_1 or !$subnet_public_2 or !$subnet_public_3 or !$subnet_private_1 or !$subnet_private_2 or !$subnet_private_3
+			raise "If deploying into an existing VPC, you must specify a nat_host_id and at least one pair of subnets (subnet_public_1/subnet_private_1)"
+		end
+		$nat_ssh_user="root" if !$nat_ssh_user
+	end
+
+	$admins = []
+	ENV['ADMINS'].split(/\s+/).each { |admin|
+		$admins << %Q(\t\t{\n\t\t\t"name":"#{admin}",\n\t\t\t"email":"#{admin}"\n\t\t})
+	}
+%>
+{
+	"appname": "fbopen",
+	"region": "us-east-1",
+	"admins": [
+<%= $admins.join(",\n") %>
+	],
+	"vpcs": [
+<% if !$vpc_id then %>
+	<%= ECAP::Config.include("vpc.json") %>
+<% end %>
+	],
+	"servers":[
+<% if !$vpc_id then %>
+	<%= ECAP::Config.include("bastion.json") %>
+<% end %>
+	],
+	"server_pools":[
+<%= ECAP::Config.include("fbope_pool.json") %>
+	]
+}
