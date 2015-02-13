@@ -12,6 +12,9 @@ case node[:platform_family]
 
 when "rhel"	
 
+ports=node.gsa.global.ports
+
+puts "node.gsa.global.ports #{ports}"
 
 node.gsa.global.ports.each do |port|
 
