@@ -21,7 +21,6 @@ code <<-EOH
 	 set -ex
      mkdir -p /rood/.devops
      cd /rood/.devops
-     cd #{$git_repo_name}
      git clone https://#{$git_repo}
 
 EOH
