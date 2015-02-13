@@ -43,7 +43,8 @@ end
 bash "External dependency on another git repo" do
 user "root"
 code <<-EOH
-	
+    cd /rood/.devops
+	cd #{$git_repo_name}
 	git submodule update --init --recursive
    
 EOH
