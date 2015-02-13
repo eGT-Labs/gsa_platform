@@ -10,9 +10,6 @@
 {
 	"appname": "fbopen",
 	"region": "us-east-1",
-	"admins": [
-<%= $admins.join(",\n") %>
-	],
 	"vpcs": [
 <% if !$vpc_id then %>
 	<%= ECAP::Config.include("vpc.json") %>
