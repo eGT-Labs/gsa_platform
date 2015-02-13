@@ -1,6 +1,6 @@
 
 {
-	"name": "portal",
+	"name": "fbopen",
 	"ami-id": "ami-bc8131d4",
 	"ssh_user":"root",
 	"storage": [

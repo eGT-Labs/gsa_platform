@@ -23,7 +23,7 @@
 			"dependencies":[
 				{
 					"type":"server",
-					"name":"bastion"
+					"name":"fbopen"
 				}
 			],
 			"subnets": [
