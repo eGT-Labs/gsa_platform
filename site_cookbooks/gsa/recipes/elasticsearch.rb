@@ -35,6 +35,24 @@ execute "yum -y install elasticsearch" do
 end
 
 
+bash "Install Plugin" do
+user "root"
+code <<-EOH
+    
+    cd /usr/share/elasticsearch/
+	bin/plugin install elasticsearch/elasticsearch-mapper-attachments/2.4.2 | echo "Plugin already added"
+
+EOH
+end
+
+
+service "elasticsearch" do
+  action :restart
+end
+
+
+
+
 
 
 
