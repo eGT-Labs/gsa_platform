@@ -14,7 +14,7 @@
 	"size": "m1.small",
 	"vpc": {
 			"vpc_name":"fbopen",
-			"subnet_name":"fbopen-Public3"
+			"subnet_name":"Public"
           },
 	  "ingress_rules": [
 		{
