@@ -6,10 +6,6 @@
 		$nat_ssh_user="root" if !$nat_ssh_user
 	end
 
-	$admins = []
-	ENV['ADMINS'].split(/\s+/).each { |admin|
-		$admins << %Q(\t\t{\n\t\t\t"name":"#{admin}",\n\t\t\t"email":"#{admin}"\n\t\t})
-	}
 %>
 {
 	"appname": "fbopen",
