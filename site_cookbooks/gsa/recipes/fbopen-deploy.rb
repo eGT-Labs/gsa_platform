@@ -7,6 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
+$env=node.chef_environment
 
 case node[:platform_family]
 
@@ -75,6 +76,8 @@ code <<-EOH
    
 EOH
 end
+
+
 
 
 

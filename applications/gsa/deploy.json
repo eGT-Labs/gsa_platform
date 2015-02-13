@@ -14,6 +14,10 @@
 		  "role[gsa-fbopen-deploy]"
 		 ],
 		"size": "m1.small",
+		"vpc": {
+				"vpc_name":"fbopen",
+				"subnet_name":"Public"
+              },
 		  "ingress_rules": [
 			{
 				"port": 80,

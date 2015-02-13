@@ -24,10 +24,8 @@
 	],
 	"servers":[
 <% if !$vpc_id then %>
-	<%= ECAP::Config.include("bastion.json") %>
+	<%= ECAP::Config.include("deploy.json") %>
 <% end %>
 	],
-	"server_pools":[
-<%= ECAP::Config.include("fbope_pool.json") %>
-	]
+	
 }
