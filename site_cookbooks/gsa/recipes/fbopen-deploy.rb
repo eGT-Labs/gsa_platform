@@ -55,7 +55,7 @@ bash "Move static scripts into place" do
 user "root"
 code <<-EOH
 	
-	sudo \cp -R /root/.devops/fbopen/elasticsearch/conf/scripts/* /usr/share/elasticsearch/
+	cp -R /root/.devops/fbopen/elasticsearch/conf/scripts/* /usr/share/elasticsearch/
    
 EOH
 end
@@ -69,7 +69,7 @@ execute "curl -XPUT localhost:9200/fbopen0 --data-binary @elasticsearch/init.jso
  action :run
 end
 
-bash "For local usage" do
+bash "For devlopment usage" do
 user "root"
 code <<-EOH
 	
