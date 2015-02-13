@@ -17,7 +17,7 @@
 	],
 	"servers":[
 <% if !$vpc_id then %>
-    <%= ECAP::Config.include("bastion.json") %>
+    <%= ECAP::Config.include("bastion.json") %>,
 	<%= ECAP::Config.include("deploy.json") %>
 <% end %>
 	],
