@@ -19,31 +19,31 @@ bash "Clone FBOpenrepo" do
 user "root"
 code <<-EOH
 	 set -ex
-     mkdir -p /rood/.devops
-     cd /rood/.devops
+     mkdir -p /root/.devops
+     cd /root/.devops
      git clone https://#{$git_repo}
 
 EOH
-not_if {::File.exists?("/rood/.devops/#{$git_repo_name}") }
+not_if {::File.exists?("/root/.devops/#{$git_repo_name}") }
 end
 
 bash "Pull git_repo" do
 user "root"
 code <<-EOH
 	
-	cd /rood/.devops
+	cd /root/.devops
 	cd #{$git_repo_name}
 	git pull | echo "Already uptodate"
    
 EOH
-only_if {::File.exists?("/rood/.devops/#{$git_repo_name}") }
+only_if {::File.exists?("/root/.devops/#{$git_repo_name}") }
 end
 
 
 bash "External dependency on another git repo" do
 user "root"
 code <<-EOH
-    cd /rood/.devops
+    cd /root/.devops
 	cd #{$git_repo_name}
 	git submodule update --init --recursive
    
@@ -73,7 +73,7 @@ bash "For local usage" do
 user "root"
 code <<-EOH
 	
-	cd /rood/.devops
+	cd /root/.devops
 	cd #{$git_repo_name}
 	sudo \cp config-sample_dev.js config.js
    
