@@ -14,17 +14,16 @@ when "rhel"
 
 
 
-bash "Download Oracal java8" do
+bash "Install Open Jdk" do
 user "root"
 code <<-EOH
-	cd /opt
-	wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u31-b13/jdk-8u31-linux-x64.tar.gz"
-    tar xzf jdk-8u31-linux-x64.tar.gz
+
+	yum -y install java-1.7.0-openjdk
+	yum -y remove install openjdk-6-jre
+	yum -y remove java-1.6.0-openjdk
+
 EOH
 end
-
-
-
 
 
 

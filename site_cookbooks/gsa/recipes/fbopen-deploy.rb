@@ -18,7 +18,7 @@ $git_repo_name=node.gsa.global.git_repo_name
 bash "Clone FBOpenrepo" do
 user "root"
 code <<-EOH
-	
+	 set -ex
      mkdir -p /rood/.devops
      git clone https://#{$git_repo}
 
