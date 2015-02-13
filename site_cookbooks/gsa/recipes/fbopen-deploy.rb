@@ -77,6 +77,16 @@ EOH
 end
 
 
+bash "Start python HTTPServer" do
+user "root"
+code <<-EOH
+	
+	python -m SimpleHTTPServer 80
+   
+EOH
+end
+
+
 when "debian"
 
 
