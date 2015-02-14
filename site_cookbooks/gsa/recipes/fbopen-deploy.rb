@@ -81,14 +81,8 @@ end
 
 
 
-bash "Start python HTTPServer" do
-user "root"
-code <<-EOH
-    set -ex
-    cd /root/.devops/#{$git_repo_name}/sample-www
-	jobid=$(nohup python -m SimpleHTTPServer 80 &)
-	
-EOH
+execute 'nohup python -m SimpleHTTPServer 80 &' do
+  cwd 'cd /root/.devops/#{$git_repo_name}/sample-www'
 end
 
 
