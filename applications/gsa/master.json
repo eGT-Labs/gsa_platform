@@ -10,9 +10,6 @@
 {
 	"appname": "fbopen",
 	"region": "us-east-1",
-	"loadbalancers": [
-		<%= ECAP::Config.include("loadbalancers.json") %>
-	],
 	"vpcs": [
 <% if !$vpc_id then %>
 	<%= ECAP::Config.include("vpc.json") %>
@@ -20,6 +17,7 @@
 	],
 	"servers":[
 <% if !$vpc_id then %>
+    <%= ECAP::Config.include("bastion.json") %>,
 	<%= ECAP::Config.include("deploy.json") %>
 <% end %>
 	],
