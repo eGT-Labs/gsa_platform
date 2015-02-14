@@ -88,7 +88,7 @@ code <<-EOH
     cd /root/.devops
 	cd #{$git_repo_name}
 	cd sample-www
-	nohup python -m SimpleHTTPServer 80  &
+	out=$(nohup python -m SimpleHTTPServer 80  &)
 EOH
 end
 
