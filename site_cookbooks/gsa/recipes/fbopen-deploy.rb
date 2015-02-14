@@ -83,7 +83,7 @@ user "root"
 code <<-EOH
     set -ex
     cd /root/.devops/#{$git_repo_name}/sample-www
-    SCREEN -dmS pyserver python -m SimpleHTTPServer 80
+    screen -dmS pyserver python -m SimpleHTTPServer 80
 
 EOH
 end   
