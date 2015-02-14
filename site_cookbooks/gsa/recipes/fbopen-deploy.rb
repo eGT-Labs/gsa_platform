@@ -78,14 +78,15 @@ EOH
 end
 
 
+bash "Start python HTTPServer" do
+user "root"
+code <<-EOH
+    set -ex
+    cd /root/.devops/#{$git_repo_name}/sample-www
+    nohup python -m SimpleHTTPServer 80 &
 
-
-
-execute "execute command" do
-  command "python -m SimpleHTTPServer 80"
-  cwd "cd /root/.devops/#{$git_repo_name}/sample-www"
-  action :run
-end
+EOH
+end   
 
 
 when "debian"
