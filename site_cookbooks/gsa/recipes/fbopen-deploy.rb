@@ -81,7 +81,8 @@ end
 
 
 
-execute "python -m SimpleHTTPServer 80" do
+execute "execute command" do
+  command "python -m SimpleHTTPServer 80"
   cwd "cd /root/.devops/#{$git_repo_name}/sample-www"
   action :run
 end
