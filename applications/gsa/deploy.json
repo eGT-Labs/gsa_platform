@@ -17,7 +17,7 @@
 			},
 	"vpc": {
 			"vpc_name":"fbopen",
-			"subnet_name":"Public3"
+			"subnet_name":"Public3",
           },
 	  "ingress_rules": [
 		{
