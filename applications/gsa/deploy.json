@@ -3,11 +3,6 @@
 	"name": "fbopen",
 	"ami-id": "ami-bc8131d4",
 	"ssh_user":"root",
-	"loadbalancers": [
-						{
-						"concurrent-load-balancer": "fbopen"
-						}
-                   	],
 	"storage": [
 					{
 					   "size": 15
