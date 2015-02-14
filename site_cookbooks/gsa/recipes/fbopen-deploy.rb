@@ -81,16 +81,29 @@ end
 
 
 
-bash "Start python HTTPServer" do
+
+
+
+python "Start python HTTPServer" do
 user "root"
+cwd "/root/.devops/#{$git_repo_name}/sample-www"
 code <<-EOH
-    set -ex
-    cd /root/.devops
-	cd #{$git_repo_name}
-	cd sample-www
-	nohup /usr/bin/python -m SimpleHTTPServer 80  &
+
+import SimpleHTTPServer
+import SocketServer
+
+PORT = 80
+
+Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
+
+httpd = SocketServer.TCPServer(("", PORT), Handler)
+
+print "serving at port", PORT
+httpd.serve_forever()
+
 EOH
 end
+
 
 
 when "debian"
