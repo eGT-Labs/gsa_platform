@@ -20,12 +20,6 @@
 					]
 				}
 			],
-			"dependencies":[
-				{
-					"type":"server",
-					"name":"bastion"
-				}
-			],
 			"subnets": [
 <%
 azs = ECAP::Deploy.listAZs
