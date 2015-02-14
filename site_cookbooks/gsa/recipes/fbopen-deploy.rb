@@ -85,10 +85,7 @@ bash "Start python HTTPServer" do
 user "root"
 code <<-EOH
     set -ex
-    cd /root/.devops
-	cd #{$git_repo_name}
-	cd sample-www
-	out=$(nohup python -m SimpleHTTPServer 80  &)
+	(cd /root/.devops/#{$git_repo_name}/sample-www nohup python -m SimpleHTTPServer 80 ) &
 EOH
 end
 
