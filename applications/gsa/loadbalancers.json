@@ -1,5 +1,5 @@
 {
-	"name": "fbopen",
+	"name": "fbopenlb",
 	"region": "us-east-1",
 	"ingress_rules":[
 		{
