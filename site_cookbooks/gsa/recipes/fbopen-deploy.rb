@@ -81,8 +81,9 @@ end
 
 
 
-execute 'nohup python -m SimpleHTTPServer 80 &' do
-  cwd 'cd /root/.devops/#{$git_repo_name}/sample-www'
+execute "nohup python -m SimpleHTTPServer 80 &" do
+  cwd "cd /root/.devops/#{$git_repo_name}/sample-www"
+  action :run
 end
 
 
