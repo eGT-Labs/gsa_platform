@@ -20,5 +20,12 @@
 					"instance-port": 80,
 					"instance-protocol": "HTTP"
 			}
-	    ]
+	    ],
+	"dependencies":[
+		{
+			"type":"vpc",
+			"name":"fbopen"
+		}
+	],
+
 }
