@@ -24,11 +24,5 @@
 					"instance-protocol": "HTTP"
 			}
 	    ],
-	"dependencies":[
-		{
-			"type":"vpc",
-			"name":"fbopen"
-		}
-	],
 
 }
