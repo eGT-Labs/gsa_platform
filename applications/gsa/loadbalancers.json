@@ -2,7 +2,8 @@
 	"name": "fbopenlb",
 	"region": "us-east-1",
 	"vpc":{
-         "vpc_name":"fbopen"
+         "vpc_name":"fbopen",
+         "subnet_name":"Public3"
 		},
 	"ingress_rules":[
 		{
