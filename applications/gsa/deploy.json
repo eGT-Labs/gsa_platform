@@ -7,6 +7,7 @@
 						{
 						"concurrent-load-balancer": "fbopenlb"
 						}
+					],
 	"storage": [
 					{
 					   "size": 15
