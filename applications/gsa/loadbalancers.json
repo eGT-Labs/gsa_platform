@@ -2,7 +2,7 @@
 	"name": "fbopenlb",
 	"region": "us-east-1",
 	"vpc":{
-         "vpc_name":"fbopen"
+         "vpc_name":""
 		},
 	"ingress_rules":[
 		{
