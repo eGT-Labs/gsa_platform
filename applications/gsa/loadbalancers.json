@@ -1,9 +1,6 @@
 {
 	"name": "fbopenlb",
 	"region": "us-east-1",
-	"vpc":{
-         "vpc_name":"fbopen"
-		},
 	"ingress_rules":[
 		{
 			"port":80,
@@ -24,6 +21,11 @@
 					"instance-protocol": "HTTP"
 			}
 	    ],
-	
+	"dependencies":[
+		{
+			"type":"vpc",
+			"name":"fbopen"
+		}
+	],
 
 }
