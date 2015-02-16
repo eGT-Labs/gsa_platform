@@ -13,6 +13,11 @@
 					   "size": 15
 					}
 	           ],
+    "dependencies":[{
+       "type":"loadbalancer",
+       "name":"fbopenlb"
+       }
+    ],
 	"run_list": [
 	  "role[gsa-fbopen-deploy]"
 	 ],
