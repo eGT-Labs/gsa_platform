@@ -11,6 +11,11 @@
 				"vpc_name":"fbopen",
 				"subnet_name":"Public3"
 			},
+			"application_attributes":{
+			 "nat": {
+               "private_net": "10.1.0.0/16"
+               }
+			},
 			"ingress_rules":[
 				{
 					"proto":"icmp",
