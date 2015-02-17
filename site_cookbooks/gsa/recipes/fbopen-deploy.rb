@@ -82,6 +82,7 @@ end
 bash "Create symboliclink" do
 user "root"
 code <<-EOH
+    set -ex
 	rm -rf /var/www/#{$git_repo_name}
 	ln -s /root/.devops/#{$git_repo_name}/ /var/www/#{$git_repo_name} | echo "Symbolic link already created"
 EOH
