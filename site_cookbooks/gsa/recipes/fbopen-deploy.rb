@@ -25,7 +25,7 @@ code <<-EOH
      git clone https://#{$git_repo}
 
 EOH
-not_if {::File.exists?("/root/.devops/#{$git_repo_name}") }
+not_if {::File.exists?("/var/www/#{$git_repo_name}") }
 end
 
 bash "Pull git_repo" do
@@ -37,7 +37,7 @@ code <<-EOH
 	git pull | echo "Already uptodate"
    
 EOH
-only_if {::File.exists?("/root/.devops/#{$git_repo_name}") }
+only_if {::File.exists?("/var/www/#{$git_repo_name}") }
 end
 
 
