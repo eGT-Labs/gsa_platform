@@ -78,15 +78,23 @@ EOH
 end
 
 
-bash "Start python HTTPServer" do
+
+bash "Create symboliclink" do
 user "root"
 code <<-EOH
-    set -ex
-    cd /root/.devops/#{$git_repo_name}/sample-www
-    nohup python -m SimpleHTTPServer 80 &
-
+rm -rf /var/www/#{$git_repo_name}
+ln -s /root/.devops/#{$git_repo_name}/ /var/www/#{$git_repo_name} | echo "Symbolic link already created"
 EOH
-end   
+not_if { File.symlink?("/var/www/#{$git_repo_name}") }
+end
+ 
+
+
+
+
+service "httpd" do
+ action :restart
+end
 
 
 when "debian"

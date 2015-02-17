@@ -28,7 +28,3 @@ link "/etc/httpd/sites-enabled/fbopen" do
  to "/etc/httpd/sites-available/fbopen"
 end
 
-
-service "httpd" do
- action :restart
-end
