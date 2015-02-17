@@ -17,7 +17,7 @@ template '/etc/nginx/nginx.conf' do
 end
 
 
-template '/etc/nginx/sites-available' do
+template '/etc/nginx/sites-available/fbopen' do
     owner 'root'
     group 'root'
     mode '0644'
