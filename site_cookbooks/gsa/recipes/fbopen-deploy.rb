@@ -82,8 +82,8 @@ end
 bash "Create symboliclink" do
 user "root"
 code <<-EOH
-rm -rf /var/www/#{$git_repo_name}
-ln -s /root/.devops/#{$git_repo_name}/ /var/www/#{$git_repo_name} | echo "Symbolic link already created"
+	rm -rf /var/www/#{$git_repo_name}
+	ln -s /root/.devops/#{$git_repo_name}/ /var/www/#{$git_repo_name} | echo "Symbolic link already created"
 EOH
 not_if { File.symlink?("/var/www/#{$git_repo_name}") }
 end
