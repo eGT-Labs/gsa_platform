@@ -8,8 +8,8 @@
 #
 include_recipe "utility::wget"
 include_recipe "utility::git"
-include_recipe "nginx"
-include_recipe "gsa::nginx"
+include_recipe "apache2"
+include_recipe "gsa::apache"
 include_recipe "gsa::java"
 include_recipe "gsa::iptables-port"
 include_recipe "gsa::elasticsearch"
