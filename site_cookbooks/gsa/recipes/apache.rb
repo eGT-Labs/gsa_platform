@@ -12,7 +12,7 @@ template '/etc/httpd/conf/httpd.conf' do
     owner 'root'
     group 'root'
     mode '0644'
-    source "apache/conf/httpd.conf"
+    source "apache/conf/httpd.conf.erb"
 end
 
 
