@@ -1,0 +1,10 @@
+<VirtualHost *:80>
+  ServerAdmin jaipbapna@gmail.com
+  DocumentRoot /var/www/fbopen/sample-www
+  ServerName localhost
+  ErrorLog /var/log/fbopen-error.log
+  CustomLog /var/log/fbopen-access.log combined
+  <Directory /var/www/sample-www>
+    AllowOverride All
+  </Directory>
+</VirtualHost>
