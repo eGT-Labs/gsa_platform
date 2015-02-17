@@ -20,8 +20,8 @@ bash "Clone FBOpenrepo" do
 user "root"
 code <<-EOH
 	 
-     mkdir -p /root/.devops
-     cd /root/.devops
+     mkdir -p /var/www
+     cd /var/www
      git clone https://#{$git_repo}
 
 EOH
@@ -32,7 +32,7 @@ bash "Pull git_repo" do
 user "root"
 code <<-EOH
 	
-	cd /root/.devops
+	cd /var/www
 	cd #{$git_repo_name}
 	git pull | echo "Already uptodate"
    
@@ -44,7 +44,7 @@ end
 bash "External dependency on another git repo" do
 user "root"
 code <<-EOH
-    cd /root/.devops
+    cd /var/www
 	cd #{$git_repo_name}
 	git submodule update --init --recursive
    
@@ -56,7 +56,7 @@ bash "Move static scripts into place" do
 user "root"
 code <<-EOH
 	
-	cp -R /root/.devops/fbopen/elasticsearch/conf/scripts/* /usr/share/elasticsearch/
+	cp -R /var/www/#{$git_repo_name}/elasticsearch/conf/scripts/* /usr/share/elasticsearch/
    
 EOH
 end
@@ -70,26 +70,12 @@ bash "For devlopment usage" do
 user "root"
 code <<-EOH
 	
-	cd /root/.devops
+	cd /var/www
 	cd #{$git_repo_name}/api
 	cp config-sample_dev.js config.js
    
 EOH
 end
-
-
-
-bash "Create symboliclink" do
-user "root"
-code <<-EOH
-    set -ex
-	rm -rf /var/www/#{$git_repo_name}
-	ln -s /root/.devops/#{$git_repo_name}/ /var/www/#{$git_repo_name} | echo "Symbolic link already created"
-EOH
-not_if { File.symlink?("/var/www/#{$git_repo_name}") }
-end
- 
-
 
 
 
