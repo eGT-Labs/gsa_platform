@@ -1,0 +1,12 @@
+server {
+  listen   80;
+
+  root /var/www/fbopen/sample-www;
+  index index.html index.htm;
+
+
+  location / {
+   default_type "text/html";
+   try_files $uri.html $uri $uri/ /index.html;
+  }
+}
