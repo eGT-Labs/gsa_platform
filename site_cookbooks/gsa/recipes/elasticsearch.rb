@@ -50,17 +50,7 @@ service "elasticsearch" do
   action :restart
 end
 
-
-
-
-
-
-
-
-
 when "debian"
-
-
 
 else
 

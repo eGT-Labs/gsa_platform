@@ -19,7 +19,7 @@ user "root"
 code <<-EOH
 
 	yum -y install java-1.7.0-openjdk
-	yum -y remove install openjdk-6-jre
+	yum -y remove openjdk-6-jre
 	yum -y remove java-1.6.0-openjdk
 
 EOH

@@ -1,10 +1,10 @@
 <VirtualHost *:80>
   ServerAdmin jaipbapna@gmail.com
-  DocumentRoot /var/www/fbopen/sample-www
+  DocumentRoot <%=node.gsa.global.apps_dir%>/<%=node.gsa.global.git_repo_name%>/sample-www
   ServerName localhost
   ErrorLog /var/log/fbopen-error.log
   CustomLog /var/log/fbopen-access.log combined
-  <Directory /var/www/sample-www>
+  <Directory <%=node.gsa.global.apps_dir%>/<%=node.gsa.global.git_repo_name%>/sample-www>
     AllowOverride All
   </Directory>
 </VirtualHost>
