@@ -15,7 +15,6 @@ template '/etc/httpd/conf/httpd.conf' do
     source "apache/conf/httpd.conf.erb"
 end
 
-
 template '/etc/httpd/sites-available/fbopen' do
     owner 'root'
     group 'root'
@@ -27,4 +26,3 @@ end
 link "/etc/httpd/sites-enabled/fbopen" do
  to "/etc/httpd/sites-available/fbopen"
 end
-

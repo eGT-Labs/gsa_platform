@@ -17,19 +17,13 @@ ports=node.gsa.global.ports
 puts "node.gsa.global.ports #{ports}"
 
 node.gsa.global.ports.each do |port|
-
 	bash "Open Port" do
 	user "root"
 	code <<-EOH
-	    
 	    /sbin/iptables -I INPUT -p tcp --dport #{port} -j ACCEPT && service iptables save
-
 	EOH
 	end
-	 
 end
-
-
 
 when "debian"
 

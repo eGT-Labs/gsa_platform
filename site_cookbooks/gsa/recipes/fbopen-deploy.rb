@@ -13,8 +13,14 @@ case node[:platform_family]
 
 when "rhel"	
 
+$apps_dir=node.gsa.global.apps_dir
 $git_repo=node.gsa.global.git_repo
 $git_repo_name=node.gsa.global.git_repo_name
+
+
+
+
+
 
 bash "Clone FBOpenrepo" do
 user "root"
@@ -76,8 +82,6 @@ code <<-EOH
    
 EOH
 end
-
-
 
 service "httpd" do
  action :restart

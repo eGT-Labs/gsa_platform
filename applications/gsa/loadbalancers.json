@@ -27,6 +27,12 @@
 					"lb-protocol": "HTTP",
 					"instance-port": 80,
 					"instance-protocol": "HTTP"
+			},
+			{
+					"lb-port": 3000,
+					"lb-protocol": "TCP",
+					"instance-port": 3000,
+					"instance-protocol": "TCP"
 			}
 	    ],
 	"dependencies":[
