@@ -26,7 +26,7 @@ user "root"
 code <<-EOH
 	cd #{$apps_dir}/#{$git_repo_name}/api
 	npm install
-	sudo npm install -g forever
+	npm install -g forever
 	forever -m5 app.js
 EOH
 only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
