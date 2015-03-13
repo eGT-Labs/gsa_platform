@@ -19,15 +19,6 @@ only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
 end
 
 
-bash "load fbo.gov loadder" do
-user "root"
-code <<-EOH
-     cd #{$apps_dir}/#{$git_repo_name}/loaders/fbo.gov
-	  npm install
-     FBOPEN_ROOT=#{$apps_dir}/#{$git_repo_name} FBOPEN_URI=#{$fbopen_uri} FBOPEN_INDEX=#{$fbopen_index} ./fbo-nightly.sh | echo "already have"
-EOH
-only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
-end
 
 
 
