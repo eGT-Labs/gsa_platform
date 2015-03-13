@@ -36,7 +36,7 @@ code <<-EOH
         rm -rf run.pid
   fi
 
-  nohup node  app.js > /dev/null 2>&1 &
+  nohup node  app.js > api_run.log 2>&1 &
   echo $! > run.pid
 EOH
 only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
