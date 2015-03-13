@@ -1,6 +1,6 @@
 case node[:platform_family]
 		when "rhel"	
-			bash "Install Open Jdk" do
+			bash "Install nodejs" do
 			user "root"
 			code <<-EOH
 			    yum -y groupinstall "Development Tools" | echo "success"
@@ -17,8 +17,6 @@ case node[:platform_family]
 			end
 
 		when "debian"
-
-
 
 else
 
