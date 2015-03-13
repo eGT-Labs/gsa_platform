@@ -21,25 +21,40 @@ case node[:platform_family]
 when "rhel"	
 
 
+service "httpd" do
+ action :nothing
+end
 
 
 
 
+e = bash "clone html applicatiion" do
+user "root"
+code <<-EOH
+	cd #{$apps_dir}/#{$git_repo_name}/api
+	rm -rf /var/www/html/*
+    cp -R sample-www/* /var/www/html/
+    chown -R apache /var/www/html
+EOH
+only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
+action :nothing
+end
 
-template "#{$apps_dir}/#{$git_repo_name}/sample-www/config.js" do
+e.run_action(:run)
+
+template "/var/www/html/config.js" do
     source "web_server/config.js.erb"
     mode 0755
-    owner "root"
-    group "root"
+    owner "apache"
+    group "apache"
     variables({
     	 :server_url => server_url
     	})
+    notifies :restart, "service[httpd]", :delayed
 end
 
 
-service "httpd" do
- action :restart
-end
+
 
 
 when "debian"
