@@ -31,7 +31,7 @@ end
 e = bash "clone html applicatiion" do
 user "root"
 code <<-EOH
-	cd #{$apps_dir}/#{$git_repo_name}/api
+	cd #{$apps_dir}/#{$git_repo_name}
 	rm -rf /var/www/html/*
     cp -R sample-www/* /var/www/html/
     chown -R apache /var/www/html
