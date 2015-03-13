@@ -46,7 +46,7 @@ EOH
 end
 
 # for managing service
-# jboss block until operational
+# elasticsearch block until operational
 ruby_block "block_until_operational" do
   block do
     until IO.popen("netstat -lnt").entries.select { |entry|
@@ -58,9 +58,6 @@ ruby_block "block_until_operational" do
   end
   action :nothing
 end
-
-
-
 
 service "elasticsearch" do
   action :restart
