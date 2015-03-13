@@ -26,8 +26,18 @@ user "root"
 code <<-EOH
 	cd #{$apps_dir}/#{$git_repo_name}/api
 	npm install
-	npm install -g forever
-	forever -m5 app.js
+  # check process already exists
+  if [[ -f run.pid ]];
+    then
+     if ps -p `cat run.pid` > /dev/null
+        then
+          kill -15 `cat run.pid`
+        fi
+        rm -rf run.pid
+  fi
+
+  nohup node  app.js > /dev/null 2>&1 &
+  echo $! > run.pid
 EOH
 only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
 end
