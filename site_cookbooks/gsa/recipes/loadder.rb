@@ -18,10 +18,6 @@ EOH
 only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
 end
 
-
-
-
-
 bash "load fbo.gov loadder" do
 user "root"
 code <<-EOH
@@ -32,7 +28,6 @@ EOH
 only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
 end
 
-
 bash "load bids.state.gov loadder" do
 user "root"
 code <<-EOH
@@ -42,8 +37,6 @@ code <<-EOH
 EOH
 only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
 end
-
-
 
 bash "load grants.gov loadder" do
 user "root"
