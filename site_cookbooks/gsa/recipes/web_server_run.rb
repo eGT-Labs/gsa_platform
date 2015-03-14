@@ -20,11 +20,9 @@ case node[:platform_family]
 
 when "rhel"	
 
-
 service "httpd" do
  action :nothing
 end
-
 
 
 
@@ -49,8 +47,6 @@ template "/var/www/html/config.js" do
     	})
     notifies :restart, "service[httpd]", :delayed
 end
-
-
 
 
 
