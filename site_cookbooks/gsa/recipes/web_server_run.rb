@@ -28,19 +28,16 @@ end
 
 
 
-e = bash "clone html applicatiion" do
+bash "clone html application" do
 user "root"
 code <<-EOH
 	cd #{$apps_dir}/#{$git_repo_name}
-	rm -rf /var/www/html/*
-    cp -R sample-www/* /var/www/html/
+    /bin/cp -rf sample-www/* /var/www/html/
     chown -R apache /var/www/html
 EOH
 only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
-action :nothing
 end
 
-e.run_action(:run)
 
 template "/var/www/html/config.js" do
     source "web_server/config.js.erb"
