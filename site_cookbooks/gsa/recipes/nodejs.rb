@@ -7,12 +7,12 @@ case node[:platform_family]
 				cd /usr/src
 
 				rm -rf node-v*
-				wget http://nodejs.org/dist/v0.12.0/node-v0.12.0.tar.gz
+				wget http://nodejs.org/dist/v0.11.8/node-v0.11.8.tar.gz
 				tar xzvf node-v* && cd node-v*
 				./configure
 				make && make install
 			EOH
-			not_if {::File.exists?("/usr/local/bin/node") && `/usr/local/bin/node --version`.chomp == "v0.12.0" }
+			not_if {::File.exists?("/usr/local/bin/node") && `/usr/local/bin/node --version`.chomp == "v0.11.8" }
 			end
 		when "debian"
 else
