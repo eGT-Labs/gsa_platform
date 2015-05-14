@@ -4,6 +4,7 @@ $apps_dir=node.gsa.global.apps_dir
 $git_repo=node.gsa.global.git_repo
 $git_repo_name=node.gsa.global.git_repo_name
 
+$repo_path="#{$apps_dir}/#{$git_repo_name}/src"
 
 server_url="localhost"
 
@@ -26,15 +27,16 @@ end
 
 
 
-bash "clone html application" do
-user "root"
-code <<-EOH
-	cd #{$apps_dir}/#{$git_repo_name}
-    /bin/cp -rf sample-www/* /var/www/html/
-    chown -R apache /var/www/html
-EOH
-only_if {::File.exists?("#{$apps_dir}/#{$git_repo_name}") }
-end
+execute "clone html application" do
+   cwd "#{$repo_path}"
+   command <<-EOH
+       /bin/cp -rf sample-www/* /var/www/html/
+       chown -R apache /var/www/html
+    EOH
+   only_if {::File.exists?("#{$repo_path}") }
+end 
+
+
 
 
 template "/var/www/html/config.js" do
@@ -47,7 +49,6 @@ template "/var/www/html/config.js" do
     	})
     notifies :restart, "service[httpd]", :delayed
 end
-
 
 
 when "debian"

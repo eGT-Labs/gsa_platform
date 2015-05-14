@@ -3,6 +3,8 @@ $apps_dir=node.gsa.global.apps_dir
 $git_repo=node.gsa.global.git_repo
 $git_repo_name=node.gsa.global.git_repo_name
 
+$api_location="#{$apps_dir}/#{$git_repo_name}/src/api"
+
 
 directory "/var/log/#{$git_repo_name}" do
   recursive true
@@ -14,7 +16,7 @@ file "/var/log/#{$git_repo_name}/api.log" do
 end
 
 
-template "#{$apps_dir}/#{$git_repo_name}/api/config.js" do
+template "#{$api_location}/config.js" do
     source "api_server/config.js.erb"
     mode 0755
     owner "root"
@@ -24,7 +26,7 @@ end
 bash "run api server" do
 user "root"
 code <<-EOH
-	cd #{$apps_dir}/#{$git_repo_name}/api
+	cd #{$api_location}
 	npm install
   # check process already exists
   if [[ -f run.pid ]];
