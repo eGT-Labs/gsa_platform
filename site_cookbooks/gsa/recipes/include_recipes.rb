@@ -7,8 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe "utility::wget"
-include_recipe "utility::git"
+include_recipe "gsa::wget"
+include_recipe "gsa::git"
 include_recipe "apache2"
 include_recipe "gsa::java"
 include_recipe "gsa::elasticsearch"
