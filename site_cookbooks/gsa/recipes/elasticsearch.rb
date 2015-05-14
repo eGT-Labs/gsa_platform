@@ -45,22 +45,26 @@ code <<-EOH
 EOH
 end
 
+# for managing service
+# elasticsearch block until operational
+ruby_block "block_until_operational" do
+  block do
+    until IO.popen("netstat -lnt").entries.select { |entry|
+        entry.split[3] =~ /:9200$/
+      }.size == 1   
+      Chef::Log.debug "service[elasticsearch] not listening on port 9200"
+      sleep 1
+    end
+  end
+  action :nothing
+end
 
 service "elasticsearch" do
   action :restart
+  notifies :create, 'ruby_block[block_until_operational]', :immediate
 end
 
-
-
-
-
-
-
-
-
 when "debian"
-
-
 
 else
 

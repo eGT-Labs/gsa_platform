@@ -4,11 +4,11 @@
 },
 "json_class": "Chef::Role",
 "run_list": [
-
 "recipe[gsa::include_recipes]"
 ],
 "description": "kpwpce Build",
 "chef_type": "role",
 "override_attributes": {
+	
 }
 }

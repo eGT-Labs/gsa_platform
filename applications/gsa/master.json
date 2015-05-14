@@ -12,16 +12,16 @@
 	"region": "us-east-1",
 	"vpcs": [
 <% if !$vpc_id then %>
-	<%= ECAP::Config.include("vpc.json") %>
+	<%= include "vpc.json" %>
 <% end %>
 	],
 	"loadbalancers": [
-	<%= ECAP::Config.include("loadbalancers.json") %>
+	<%= include "loadbalancers.json" %>
 	],
 	"servers":[
 <% if !$vpc_id then %>
-    <%= ECAP::Config.include("bastion.json") %>,
-	<%= ECAP::Config.include("deploy.json") %>
+    <%= include "bastion.json" %>,
+	<%= include "deploy.json" %>
 <% end %>
 	],
 	
