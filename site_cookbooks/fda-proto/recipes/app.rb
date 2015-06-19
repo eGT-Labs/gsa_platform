@@ -28,7 +28,7 @@ execute "git clone git@github.com:eGT-Labs/egt-gsa-proto.git #{$app_dir}" do
 end
 
 	template "/etc/rc.d/init.d/fda-data" do
-		source "openfemaapi-init.erb"
+		source "fda-data-init.erb"
 		mode '0755'
 		owner 'root'
 		group 'root'
