@@ -32,6 +32,6 @@ end
 		mode '0755'
 		owner 'root'
 		group 'root'
-		variables :details => { :dir => "/home/fda-data", :service => "FDAData" }
+		variables(:details => { :dir => "/home/fda-data", :service => "FDAData" })
 #		notifies :restart, "service[fda-data]", :delayed
 	end

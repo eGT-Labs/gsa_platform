@@ -13,10 +13,9 @@
 	],
 	"chef_type": "role",
 	"override_attributes": {
-		"jenkins": {
-			"master": {
-				"port": 80
-			}
+    "java" : {
+			"home": "/usr/lib/jvm/java-1.7.0",
+      "jdk_version" : 7
 		}
 	}
 }

@@ -1,0 +1,11 @@
+<VirtualHost *:80>
+  ProxyPass / http://localhost:8080/
+  ProxyPassReverse / http://localhost:8080/
+	CustomLog <%= node['apache']['log_dir'] %>/jenkins-access.log combined
+	ErrorLog <%= node['apache']['log_dir'] %>/jenkins-error.log
+</VirtualHost>
+<Proxy *>
+	Order allow,deny
+	Allow from all
+</Proxy>
+

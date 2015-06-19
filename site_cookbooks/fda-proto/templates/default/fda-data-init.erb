@@ -7,13 +7,13 @@
 
 USER="fdadata"
 DAEMON="supervisor"
-WORKING_DIR="<%= @details.dir %>"
-SERVER="<%= @details.dir %>/app.js"
-LOG_FILE="/var/log/node/<%= @details.service %>.log"
+WORKING_DIR="<%= @details[:dir] %>"
+SERVER="<%= @details[:dir] %>/app.js"
+LOG_FILE="/var/log/node/<%= @details[:service] %>.log"
 LOG_DIRECTORY="/var/log/node/"
-LOCK_FILE="/var/lock/subsys/<%= @details.service %>"
+LOCK_FILE="/var/lock/subsys/<%= @details[:service] %>"
 WATCH_ITEMS="./"
-SERVICE_NAME="<%= @details.service %> API"
+SERVICE_NAME="<%= @details[:service] %> API"
 
 do_start()
 {
