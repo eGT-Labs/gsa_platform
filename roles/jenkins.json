@@ -1,0 +1,22 @@
+{
+	"name": "jenkins",
+	"default_attributes": {
+	},
+	"json_class": "Chef::Role",
+	"run_list": [
+		"recipe[build-essential]",
+		"recipe[yum-epel]",
+		"recipe[java]",
+		"recipe[fda-proto]",
+		"recipe[jenkins::master]",
+		"recipe[fda-proto::jenkins]"
+	],
+	"chef_type": "role",
+	"override_attributes": {
+		"jenkins": {
+			"master": {
+				"port": 80
+			}
+		}
+	}
+}

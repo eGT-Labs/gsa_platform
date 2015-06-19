@@ -1,0 +1,119 @@
+#!/bin/sh
+# chkconfig: 35 85 15
+# description:  FDAData API
+
+
+. /etc/rc.d/init.d/functions
+
+USER="fdadata"
+DAEMON="supervisor"
+WORKING_DIR="<%= @details.dir %>"
+SERVER="<%= @details.dir %>/app.js"
+LOG_FILE="/var/log/node/<%= @details.service %>.log"
+LOG_DIRECTORY="/var/log/node/"
+LOCK_FILE="/var/lock/subsys/<%= @details.service %>"
+WATCH_ITEMS="./"
+SERVICE_NAME="<%= @details.service %> API"
+
+do_start()
+{
+        if [ ! -f "$LOCK_FILE" ] ; then
+            pid=`ps -aefw | grep "$DAEMON -q -w $WATCH_ITEMS $SERVER" | grep -v " grep " | awk '{print $2}'`
+            if [ ! -z "$pid" ]
+            then
+                echo "Error: $SERVICE_NAME: Supervisor already running: $pid"
+                echo "Killing $SERVICE_NAME..."
+                do_stop
+            fi
+            pid=`ps -aefw | grep "node $SERVER" | grep -v " grep " | awk '{print $2}'`
+            if [ ! -z "$pid" ]
+            then
+                echo "Error: $SERVICE_NAME: Service still running: $pid"
+                echo "Killing $SERVICE_NAME..."
+                do_stop
+            fi
+            echo -n $"Starting $SERVICE_NAME: "
+            # Make sure logfile exists and can be written by the user we drop privileges to
+            if [ ! -d "$LOG_DIRECTORY" ]; then
+                echo -n "Creating log directory: $LOG_DIRECTORY "
+                mkdir -p $LOG_DIR
+            fi
+            touch $LOG_FILE
+            chown $USER:$USER $LOG_FILE
+            cd $WORKING_DIR
+
+            runuser -l  "$USER" -c "cd $WORKING_DIR; $DAEMON -q -w $WATCH_ITEMS $SERVER >> $LOG_FILE &"
+            supervisorPid=$!
+            wait $supervisorPid
+            RETVAL=$?
+            [ $RETVAL -eq 0 ] && touch $LOCK_FILE && echo_success || echo_failure
+            echo
+            return $RETVAL
+        else
+            echo -n $"Starting $SERVICE_NAME: "
+            echo_failure
+            echo
+            echo "$SERVER is locked."
+            return 1
+        fi
+}
+do_stop()
+{
+        echo -n $"Stopping $SERVICE_NAME: "
+        pid=`ps -aefw | grep "$DAEMON -q -w $WATCH_ITEMS $SERVER" | grep -v " grep " | awk '{print $2}'`
+        if [ ! -z "$pid" ]
+        then
+            kill $pid > /dev/null 2>&1 && RETVAL=0 || RETVAL = 1
+            if [ $RETVAL -eq 1 ]; then
+                echo_failure
+                echo
+                echo "Failing terminating $DAEMON:"
+                return 1
+            fi
+            echo_success
+        fi
+        pid=`ps -aefw | grep "node $SERVER" | grep -v " grep " | awk '{print $2}'`
+        if [ ! -z "$pid" ]
+        then
+            kill $pid > /dev/null 2>&1 && RETVAL=0 || RETVAL = 1
+            RETVAL=$?
+            if [ $RETVAL -eq 1 ]; then
+                echo_failure
+                echo
+                echo "Failing terminating $SERVER:"
+                return 1
+            fi
+            echo_success
+        fi
+        rm -f $LOCK_FILE && echo_success || echo_failure
+        RETVAL=$?
+        echo
+        return $RETVAL
+}
+do_clean()
+{
+        echo -n $"Cleaning $SERVER: "
+        rm -f $LOCK_FILE && echo_success || echo_failure
+        RETVAL=$?
+        echo
+        return $RETVAL
+}
+
+case "$1" in
+        start)
+                do_start
+                ;;
+        stop)
+                do_stop
+                ;;
+        restart)
+                do_stop
+                do_start
+                ;;
+        clean)
+                do_clean
+                ;;
+        *)
+                echo "Usage: $0 {start|stop|restart|clean}"
+                return 0
+esac

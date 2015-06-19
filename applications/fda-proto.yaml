@@ -1,0 +1,70 @@
+---
+  appname: fdaproto
+  server_pools: 
+  - name: app
+    min-size: 1
+<% if $environment == 'prod' %>
+    max-size: 2
+<% else %>
+    wait_for_nodes: 1
+    max-size: 1
+<% end %>
+    run_list:
+    - role[fda-proto]
+    vault_access:
+    - vault: gsa_ssh_keys
+      item: egt-gsa-proto-github
+    ingress_rules:
+    - port: 80
+      lbs:
+      - app
+    basis:
+      launch-config:
+        name: app
+        size: t2.medium
+        storage:
+        - device: /dev/sda1
+          size: 50
+  servers:
+  - name: jenkins
+    size: t2.small
+    dns_records:
+      - zone:
+          name: egt-labs.com
+        name: gsa-fda-proto-jenkins
+    static_ip:
+      assign_ip: true
+    run_list:
+    - role[jenkins]
+    vault_access:
+    - vault: gsa_ssh_keys
+      item: egt-gsa-proto-github
+    ingress_rules:
+    - port: 80
+      hosts:
+      - 0.0.0.0/0
+    - port: 443
+      hosts:
+      - 0.0.0.0/0
+  loadbalancers:
+  - name: app
+    dns_records:
+      - zone:
+          name: egt-labs.com
+        name: gsa-fda-proto
+    private: true
+    cross_zone_unstickiness: true
+    ingress_rules:
+    - port: 80
+      hosts:
+      - 10.0.0.8/0
+    healthcheck:
+      target: HTTP:80/
+      interval: 30
+      unhealthy-threshold: 3
+      healthy-threshold: 3
+    listeners:
+    - lb-port: 80
+      lb-protocol: HTTP
+      instance-port: 80
+      instance-protocol: HTTP
