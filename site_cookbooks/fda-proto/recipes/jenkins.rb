@@ -39,6 +39,7 @@ end
 
 node.deployment.servers.app.each_pair { |node, data|
 #	jenkins_ssh_slave node do
+#		host data.private_ip_address
 #	end
 }
 package "git"
