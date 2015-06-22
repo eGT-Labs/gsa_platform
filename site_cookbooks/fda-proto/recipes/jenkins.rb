@@ -26,11 +26,30 @@ rpm_package "jenkins" do
 	source "#{Chef::Config[:file_cache_path]}/jenkins.rpm"
 end
 
-["slack", "credentials", "scm-api", "github", "github-api", "git", "git-client"].each { |plugin|
+["credentials", "scm-api", "github", "github-api", "git", "git-client"].each { |plugin|
 	jenkins_plugin plugin do
 		not_if { ::File.exists?("/var/lib/jenkins/plugins/#{plugin}.jpi") }
+		action :install
 	end
 }
+jenkins_plugin "slack" do
+	not_if { ::File.exists?("/var/lib/jenkins/plugins/slack.jpi") }
+	notifies :restart, 'service[jenkins]', :delayed
+	action :install
+end
+file "/var/lib/jenkins/jenkins.plugins.slack.SlackNotifier.xml" do
+	mode 0640
+	owner "jenkins"
+	content "<?xml version='1.0' encoding='UTF-8'?>
+<jenkins.plugins.slack.SlackNotifier_-DescriptorImpl plugin='slack@1.8'>
+  <teamDomain>teamegt</teamDomain>
+  <token>NtJWvzNlT0unlTgB5nE9ESHa</token>
+  <room></room>
+  <buildServerUrl>https://gsa-fda-proto-jenkins.egt-labs.com/</buildServerUrl>
+</jenkins.plugins.slack.SlackNotifier_-DescriptorImpl>
+"
+	notifies :restart, 'service[jenkins]', :delayed
+end
 
 github_keys = chef_vault_item("gsa_ssh_keys", "egt-gsa-proto-github")
 build_keys = chef_vault_item("gsa_ssh_keys", "egt-gsa-proto-jenkins")

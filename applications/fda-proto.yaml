@@ -24,11 +24,14 @@
       item: egt-labs-wildcard-key
     ingress_rules:
     - port: 80
-      lbs:
-      - app
+      hosts:
+      - 0.0.0.0/0
     - port: 443
-      lbs:
-      - app
+      hosts:
+      - 0.0.0.0/0
+    - port: 22
+      hosts:
+      - 172.31.0.0/16
     basis:
       launch-config:
         name: app
@@ -78,9 +81,6 @@
     - port: 443
       hosts:
       - 0.0.0.0/0
-    - port: 22
-      hosts:
-      - 172.31.0.0/16
     healthcheck:
       target: HTTP:80/
       interval: 30
