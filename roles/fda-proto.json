@@ -7,9 +7,14 @@
 		"recipe[build-essential]",
 		"recipe[yum-epel]",
 		"recipe[fda-proto]",
+		"recipe[java]",
 		"recipe[fda-proto::app]"
 	],
 	"chef_type": "role",
 	"override_attributes": {
+    "java" : {
+			"home": "/usr/lib/jvm/java-1.7.0",
+      "jdk_version" : 7
+		}
 	}
 }

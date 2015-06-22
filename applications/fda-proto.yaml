@@ -16,8 +16,17 @@
     vault_access:
     - vault: gsa_ssh_keys
       item: egt-gsa-proto-github
+    - vault: gsa_ssh_keys
+      item: egt-gsa-proto-jenkins
+    - vault: ssl
+      item: egt-labs-wildcard-cert
+    - vault: ssl
+      item: egt-labs-wildcard-key
     ingress_rules:
     - port: 80
+      lbs:
+      - app
+    - port: 443
       lbs:
       - app
     basis:
@@ -41,6 +50,12 @@
     vault_access:
     - vault: gsa_ssh_keys
       item: egt-gsa-proto-github
+    - vault: gsa_ssh_keys
+      item: egt-gsa-proto-jenkins
+    - vault: ssl
+      item: egt-labs-wildcard-cert
+    - vault: ssl
+      item: egt-labs-wildcard-key
     ingress_rules:
     - port: 80
       hosts:
@@ -59,7 +74,13 @@
     ingress_rules:
     - port: 80
       hosts:
-      - 10.0.0.8/0
+      - 0.0.0.0/0
+    - port: 443
+      hosts:
+      - 0.0.0.0/0
+    - port: 22
+      hosts:
+      - 172.31.0.0/16
     healthcheck:
       target: HTTP:80/
       interval: 30
@@ -70,3 +91,8 @@
       lb-protocol: HTTP
       instance-port: 80
       instance-protocol: HTTP
+    - lb-port: 443
+      lb-protocol: HTTPS
+      instance-port: 443
+      instance-protocol: HTTPS
+      ssl-certificate-name: egtLabsWildCardCert

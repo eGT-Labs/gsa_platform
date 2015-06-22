@@ -9,8 +9,8 @@
 		"recipe[java]",
 		"recipe[fda-proto]",
 		"recipe[jenkins::master]",
-		"recipe[fda-proto::jenkins]",
-		"recipe[fda-proto::app]"
+		"recipe[fda-proto]",
+		"recipe[fda-proto::jenkins]"
 	],
 	"chef_type": "role",
 	"override_attributes": {
