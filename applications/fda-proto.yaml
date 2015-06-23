@@ -2,12 +2,12 @@
   appname: fdaproto
   server_pools: 
   - name: app
-    min-size: 1
+    min-size: 2
 <% if $environment == 'prod' %>
-    max-size: 2
+    max-size: 3
 <% else %>
-    wait_for_nodes: 1
-    max-size: 1
+    wait_for_nodes: 2
+    max-size: 2
 <% end %>
     loadbalancers:
     - concurrent_load_balancer: app
@@ -25,10 +25,10 @@
     ingress_rules:
     - port: 80
       lbs:
-      - name: app
+      - app
     - port: 443
       lbs:
-      - name: app
+      - app
     - port: 22
       hosts:
       - 172.31.0.0/16

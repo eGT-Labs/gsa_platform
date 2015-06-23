@@ -1,0 +1,5 @@
+{
+  "id": "jenkins_https_proxy",
+  "hostgroup_name": "jenkins",
+  "command_line": "$USER1$/check_http -H $HOSTNAME$ -S -p 443"
+}

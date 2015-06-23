@@ -1,0 +1,5 @@
+{
+  "id": "node_daemon",
+  "hostgroup_name": "fda-proto",
+  "command_line": "$USER1$/check_http -H $HOSTNAME$ -p 8080"
+}
