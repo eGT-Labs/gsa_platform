@@ -34,14 +34,18 @@ execute "git clone git@github.com:eGT-Labs/egt-gsa-proto.git #{$app_dir}" do
 	not_if { File.exists?($app_dir) }
 end
 
-#	template "/etc/rc.d/init.d/fda-data" do
-#		source "fda-data-init.erb"
-#		mode '0755'
-#		owner 'root'
-#		group 'root'
-#		variables(:details => { :dir => "/home/fda-data", :service => "FDAData" })
-#		notifies :restart, "service[fda-data]", :delayed
-#	end
+template "/etc/rc.d/init.d/egt-fda-catalyst" do
+	source "fda-data-init.erb"
+	mode '0755'
+	owner 'root'
+	group 'root'
+	variables(:details => { :dir => "/apps/egt-gsa-proto", :service => "eGT FDA Catalyst Engine" })
+	notifies :restart, "service[egt-fda-catalyst]", :delayed
+end
+
+service "egt-fda-catalyst" do
+	action [:start, :enable]
+end
 
 web_app "app" do
   server_name "gsa-fda-proto.egt-labs.com"
