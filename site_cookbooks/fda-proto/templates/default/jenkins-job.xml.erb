@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project>
+<matrix-project plugin="matrix-project@1.4.1">
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
@@ -39,8 +39,7 @@
     <submoduleCfg class="list"/>
     <extensions/>
   </scm>
-  <assignedNode>app-server</assignedNode>
-  <canRoam>false</canRoam>
+  <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
@@ -53,7 +52,19 @@
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
-  <concurrentBuild>false</concurrentBuild>
+  <concurrentBuild>true</concurrentBuild>
+  <axes>
+    <org.jenkinsci.plugins.elasticaxisplugin.ElasticAxis plugin="elastic-axis@1.2">
+      <name>label</name>
+      <values>
+<% node.deployment.servers.app.each_pair do |nodename, data| %>
+        <string><%= nodename %></string>
+<% end %>
+      </values>
+      <label>app-server</label>
+      <ignoreOffline>true</ignoreOffline>
+    </org.jenkinsci.plugins.elasticaxisplugin.ElasticAxis>
+  </axes>
   <builders>
     <hudson.tasks.Shell>
       <command>mkdir -p /apps
@@ -89,7 +100,7 @@ gulp build
 
 forever stopall
 
-export PORT=<%= node.app.port %>; forever start /apps/egt-gsa-proto/dist/server/server.js
+export OPEN_FDA_API_KEY=<%= node.app.apikey %> ; export PORT=<%= node.app.port %>; forever start /apps/egt-gsa-proto/dist/server/server.js
 
 forever list
 
@@ -109,4 +120,7 @@ forever list
     </jenkins.plugins.slack.SlackNotifier>
   </publishers>
   <buildWrappers/>
-</project>
+  <executionStrategy class="hudson.matrix.DefaultMatrixExecutionStrategyImpl">
+    <runSequentially>false</runSequentially>
+  </executionStrategy>
+</matrix-project>

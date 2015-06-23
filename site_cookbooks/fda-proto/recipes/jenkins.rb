@@ -26,17 +26,13 @@ rpm_package "jenkins" do
 	source "#{Chef::Config[:file_cache_path]}/jenkins.rpm"
 end
 
-["credentials", "scm-api", "github", "github-api", "git", "git-client"].each { |plugin|
+["credentials", "scm-api", "github", "github-api", "git", "git-client", "elastic-axis", "slack"].each { |plugin|
 	jenkins_plugin plugin do
 		not_if { ::File.exists?("/var/lib/jenkins/plugins/#{plugin}.jpi") }
 		action :install
+		notifies :restart, 'service[jenkins]', :delayed
 	end
 }
-jenkins_plugin "slack" do
-	not_if { ::File.exists?("/var/lib/jenkins/plugins/slack.jpi") }
-	notifies :restart, 'service[jenkins]', :delayed
-	action :install
-end
 file "/var/lib/jenkins/jenkins.plugins.slack.SlackNotifier.xml" do
 	mode 0640
 	owner "jenkins"
@@ -78,7 +74,7 @@ node.deployment.servers.app.each_pair { |node, data|
 	jenkins_ssh_slave node.dup do
 		host data.private_ip_address
 		action :create
-		remote_fs "/jenkins"
+		remote_fs "/var/node"
 		labels ['app-server']
 		user 'root'
 		credentials 'root'

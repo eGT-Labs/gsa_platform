@@ -24,11 +24,11 @@
       item: egt-labs-wildcard-key
     ingress_rules:
     - port: 80
-      hosts:
-      - 0.0.0.0/0
+      lbs:
+      - name: app
     - port: 443
-      hosts:
-      - 0.0.0.0/0
+      lbs:
+      - name: app
     - port: 22
       hosts:
       - 172.31.0.0/16
@@ -50,6 +50,9 @@
       assign_ip: true
     run_list:
     - role[jenkins]
+    dependencies:
+    - name: app
+      type: server_pool
     vault_access:
     - vault: gsa_ssh_keys
       item: egt-gsa-proto-github
@@ -82,7 +85,7 @@
       hosts:
       - 0.0.0.0/0
     healthcheck:
-      target: HTTP:80/
+      target: HTTPS:443/label-search
       interval: 30
       unhealthy-threshold: 3
       healthy-threshold: 3
