@@ -36,6 +36,24 @@ bash "Allow 8080 through iptables" do
 		service iptables save
 	EOH
 end
+
+master = search(:node, 'name:"MU-MASTER"').first
+bash "Allow all Mu Master public traffic through iptables" do
+	user "root"
+	not_if "/sbin/iptables -nL | egrep '^ACCEPT.*#{node.tags['MU-MASTER-IP']}'"
+	code <<-EOH
+		iptables -I INPUT -p tcp -s #{node.tags['MU-MASTER-IP']} -j ACCEPT
+		service iptables save
+	EOH
+end
+bash "Allow all Mu Master private traffic through iptables" do
+	user "root"
+	not_if "/sbin/iptables -nL | egrep '^ACCEPT.*#{master.ipaddress}'"
+	code <<-EOH
+		iptables -I INPUT -p tcp -s #{master.ipaddress} -j ACCEPT
+		service iptables save
+	EOH
+end
 ssl_cert = chef_vault_item("ssl", "egt-labs-wildcard-cert")
 file "/etc/httpd/ssl/egt-labs-wildcard.crt" do
 	content ssl_cert['file-content']
