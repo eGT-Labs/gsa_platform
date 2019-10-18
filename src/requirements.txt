@@ -13,4 +13,4 @@ pyquery==1.2.8
 requests==2.2.1
 git+https://github.com/sunlightlabs/scrapelib.git#egg=scrapelib
 git+https://github.com/18f/dodsbir-scrape.git#egg=dodsbir
-urllib3==1.8.2
+urllib3==1.24.2
